@@ -66,10 +66,10 @@ class FullObstacle extends Helper {
     this.obstacleElement.className = 'full-obstacle';
     this.lowerObstaclePart.className = 'obstacle lower';
     this.lowerObstaclePart.style = `height: ${this.lowerObstacle.height}vh;`;
-    this.lowerObstaclePart.innerHTML = `<img src="/assets/img/IndustrialTile_04.png" alt="" class="obstacle-img">`;
+    this.lowerObstaclePart.innerHTML = `<img src="assets/img/IndustrialTile_04.png" alt="" class="obstacle-img">`;
     this.upperObstaclePart.className = 'obstacle upper';
     this.upperObstaclePart.style = `height: ${this.upperObstacle.height}vh;`;
-    this.upperObstaclePart.innerHTML = `<img src="/assets/img/IndustrialTile_13.png" alt="" class="obstacle-img">`;
+    this.upperObstaclePart.innerHTML = `<img src="assets/img/IndustrialTile_13.png" alt="" class="obstacle-img">`;
     this.obstacleElement.append(this.lowerObstaclePart, this.upperObstaclePart);
     document.body.append(this.obstacleElement);
     setTimeout(() => {
