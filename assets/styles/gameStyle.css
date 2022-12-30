@@ -1,0 +1,338 @@
+/* global --------------------------------------- */
+
+:root {
+    --pixelSize: 4;
+    --screenWidth: 0px;
+    --obstacleWidth: 4;
+    --isWidthSmall: 0;
+    --isHeightSmall: 0;
+}
+
+body {
+    overflow: hidden;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    /* font-family: 'Righteous', cursive; */
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    font-size: 2rem;
+    image-rendering: pixelated;
+}
+
+
+/* background ---------------------------------- */
+.overlay {
+    position: absolute;
+    opacity: 8%;
+    width: 100vw;
+    height: 100vh;
+    background-blend-mode: darken;
+}
+
+/* stars */
+.bg-sky-1 {
+    background-image: url("/assets/img/background-base/1.png");
+    z-index: -8;
+    background-blend-mode: darken;
+}
+
+/* moon */
+.bg-sky-2 {
+    background-image: url("/assets/img/background-base/2.png");
+    animation: 100s background-scroll infinite linear; 
+    z-index: -7;
+    background-blend-mode: darken;
+}
+
+/* cloud 1 */
+.bg-sky-3 {
+    background-image: url("/assets/img/background-base/3.png");
+    animation: 90s background-scroll infinite linear; 
+    z-index: -6;
+    background-blend-mode: darken;
+}
+
+/* cloud 2 */
+.bg-sky-4 {
+    background-image: url("/assets/img/background-base/4.png");
+    animation: 80s background-scroll infinite linear; 
+    z-index: -5;
+    background-blend-mode: darken;
+}
+
+.bg-city-1 {
+    background-image: url("/assets/img/1.png");
+    animation: 19s background-scroll infinite linear; 
+    z-index: -4;
+}
+
+.bg-city-2 {
+    background-image: url("/assets/img/2.png");
+    animation: 16s background-scroll infinite linear; 
+    z-index: -3;
+}
+
+.bg-city-3 {
+    background-image: url("/assets/img/3.png");
+    /* animation: 13s background-scroll infinite linear;  */
+    z-index: -2;
+}
+
+.bg-city-4 {
+    background-image: url("/assets/img/4.png");
+    animation: 10s background-scroll infinite linear; 
+    z-index: -1;
+}
+
+.bg-part {
+    position: absolute;
+    width: 100vw;
+    min-height: 100vh;
+    background-size: 100% 100%;
+}
+
+@keyframes background-scroll {
+    from {
+        background-position: 0%;
+    } to {
+        background-position: var(--screenWidth);
+    }
+}
+
+/* pigeon --------------------------------------------------------- */
+
+.pigeon {
+    position: absolute;
+    left: 20vw;
+    top: 30vh;
+    width: calc(25px * var(--pixelSize));
+    height: calc(32px * var(--pixelSize));
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.2 opacity;
+}
+
+.visable {
+    opacity: 100%;
+}
+
+.pigeon-img {
+    image-rendering: pixelated;
+    width: calc(192px * var(--pixelSize));
+    height: calc(32px * var(--pixelSize));
+    animation: pigeon-move 0.5s infinite steps(6);
+}
+/* .pigeon-hitbox {
+    height: calc(16px * var(--pixelSize));
+    width: calc(25px * var(--pixelSize));
+    background-color: aqua;
+    position: absolute;
+    bottom: 0;
+} */
+
+@keyframes pigeon-move {
+    from {
+        transform: translate3d(0px);
+    }
+
+    to {
+        transform: translate3d(-100%,0,0);
+    }
+}
+
+/* max and min height  ------------------------------------- */
+
+.min-height {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+}
+.max-height {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0px;
+}
+
+/* obstacle ----------------------------------- */
+
+.full-obstacle {
+    width: 10vw;
+    height: 100vh;
+    right: 0;
+    position: absolute;
+    animation: 3s obstacle-move linear;
+
+}
+
+
+.obstacle {
+    width: calc(80px * var(--obstacleWidth));
+    background-color: gray;
+    position: absolute;
+    right: 0;
+    padding: 0;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.upper {
+    top: 0;
+}
+
+.lower {
+    bottom: 0;
+}
+
+.obstacle-img {
+    width: 100%;
+    height: 100%;
+}
+
+@keyframes  obstacle-move{
+    from {
+        transform: translateX(calc(80px * var(--obstacleWidth)));
+    } to {
+        transform: translateX(-110vw)
+    }
+    
+}
+
+/* menu ------------------------------------------------------------- */
+
+.menu {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 20vh;
+    top: 20%;
+    z-index: 10;
+    transition: 0.2s;
+}
+
+.menu-img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 9;
+}
+
+.menu-text {
+    z-index: 10;
+    font-size: calc(5px * var(--pixelSize));
+    color: hsl(219, 93%, 40%);
+    font-weight: 900;
+  
+    --x-offset: -0.0625em;
+    --y-offset: 0.0625em;
+    --stroke: 0.025em;
+    --background-color: hsl(219, 93%, 20%);
+     --stroke-color: hsl(219, 93%, 10%);
+  
+    text-shadow: 
+    
+    var(--x-offset)
+    var(--y-offset)
+    0px
+    var(--background-color), 
+    
+    calc( var(--x-offset) - var(--stroke) )
+    calc( var(--y-offset) + var(--stroke) )
+    0px
+    var(--stroke-color);
+}
+
+.menu-button {
+    width: calc(50px * var(--pixelSize));
+    height: 100%;
+    background-color: hsl(219, 93%, 50%);
+    transition: 0.2s;
+}
+
+.menu-button:hover {
+    box-shadow: hsl(219, 93%, 30%) -5px 5px, hsl(219, 93%, 20%) -10px 10px, hsl(219, 93%, 10%) -15px 15px;
+    transform: scale(1.2);
+}
+
+.menu-button:hover p{
+    color: white;
+}
+
+.menu-button-text {
+    transition: 0.2s;
+    font-family: 'Press Start 2P', cursive;
+    color: hsl(219, 93%, 40%);
+    font-size: calc(5px * var(--pixelSize));
+    --x-offset: -0.0625em;
+    --y-offset: 0.0625em;
+    --stroke: 0.025em;
+    --background-color: hsl(219, 93%, 20%);
+     --stroke-color: hsl(219, 93%, 10%);
+  
+    text-shadow: 
+    
+    var(--x-offset)
+    var(--y-offset)
+    0px
+    var(--background-color), 
+    
+    calc( var(--x-offset) - var(--stroke) )
+    calc( var(--y-offset) + var(--stroke) )
+    0px
+    var(--stroke-color);
+}
+
+.score {
+    margin: 0;
+    padding: 2em;
+    position: absolute;
+    opacity: 0;
+}
+
+.LDM {
+    width: 7em;
+    height: 7em;
+    margin-top: 2EM;
+}
+
+.LDM p {
+    font-size: 2em;
+}
+
+
+@media (max-width: 1500px) {
+    :root {
+        --isWidthSmall: 0.5;
+    }
+}
+
+
+@media (max-width: 800px) {
+    :root {
+        --isWidthSmall: 1;
+        --pixelSize: 3;
+        --obstacleWidth: 2;
+    }
+
+    
+}
+
+@media (max-height: 800px) {
+    :root {
+        --isHeightSmall: 1;
+        --obstacleWidth: 3;
+        --pixelSize: 3;
+    }
+
+    
+}
+

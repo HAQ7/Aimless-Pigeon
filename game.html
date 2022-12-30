@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js" integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ==" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets\styles\gameStyle.css">
+    <script src="assets/scripts/gameLogic.js" defer ></script>
+    <title>AimlessPigeon</title>
+</head>
+<body>
+
+    <section class="background-holder">
+
+            <div class="bg-part bg-sky-1"></div>
+            <div class="bg-part bg-sky-2"></div>
+            <div class="bg-part bg-sky-3"></div>
+            <div class="bg-part bg-sky-4"></div>
+            <div class="bg-part bg-city-1"></div>
+            <div class="bg-part bg-city-2"></div>
+            <div class="bg-part bg-city-4"><div>
+
+        </section>
+
+        <section class="menu">
+            <h3 class="menu-text">Aimless Pigeon</h3>
+            <button class="menu-button"><p class="menu-button-text">Start</p></button>
+            <button class="menu-button LDM"><p class="menu-button-text">LDM</p></button>
+        </section>
+
+        
+
+        <h1 class="score menu-text">score: 5</h1>
+
+    </section>
+
+    <section class="playground">
+
+        <div class="max-height"></div>
+
+        <div class="pigeon" id="pigeon" draggable = "false">
+            <img src="/assets/img/Walk.png" alt="" class="pigeon-img">
+        </div>
+
+        
+
+        <div class="min-height"></div>
+
+    </section>
+
+</body>
+</html>
