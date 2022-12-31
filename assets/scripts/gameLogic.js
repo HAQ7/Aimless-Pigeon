@@ -8,14 +8,35 @@ document.documentElement.style.setProperty(
 class Helper {
   constructor() {
 
-    if (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
+    // the mess down here is for making it balacend for all screens........
+
+    if (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 1 &&
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
+      this.freeSpace = 35;
+      this.mult = 3
+    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
+      this.freeSpace = 25;
       this.mult = 4;
-    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 0.5) {
-      this.mult = 6;
+    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0 &&
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
+      this.freeSpace = 20;
+      this.mult = 5;
+    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 1 &&
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 0.5) {
+      this.freeSpace = 25;
+      this.mult = 4;
+    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
+    parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 0.5) {
+      this.freeSpace = 21;
+      this.mult = 4;
     } else {
-      this.mult = 9;
+      this.freeSpace = 18;
+      this.mult = 5;
     }
   }
+
+  // end of if hell ------------------------------
 
   elementLocation(element) {
     return {
@@ -40,8 +61,11 @@ class Helper {
 }
 
 class UpperObstacle {
-  constructor(lowerObstacleHeight) {
-    this.height = 100 - (lowerObstacleHeight + 23);
+  constructor(lowerObstacleHeight, freeSpace) {
+    this.height = 100 - (lowerObstacleHeight + freeSpace);
+    if (this.height < 0) {
+      this.height = 0;
+    }
   }
 }
 
@@ -120,7 +144,6 @@ class Pigeon extends Helper {
       this.pigeonElement.style = `transition: none;
        top: ${this.pigeonElement.offsetTop + this.mult}px;`;
     }
-    requestAnimationFrame(this.fall.bind(this));
   }
 }
 
@@ -143,7 +166,7 @@ class Score extends Helper {
 class Playground {
   constructor() {
     this.pigeon = new Pigeon();
-    window.requestAnimationFrame(this.pigeon.fall.bind(this.pigeon));
+    this.gravity = setInterval(this.pigeon.fall.bind(this.pigeon),10);
     this.obstacle = new FullObstacle();
     this.score = new Score();
 
@@ -245,11 +268,14 @@ class Playground {
     this.obstacle.obstacleElement.style.opacity = 0;
     clearInterval(this.obstacleGenerator);
     clearInterval(this.gameStateChecker);
+    clearInterval(this.gravity)
     const menu = document.querySelector('.menu');
     const menuBtn = document.querySelector(".menu-button");
     menuBtn.disabled = false;
-    menu.style = 'top: 20%; opacity: 100%;';
+    menu.classList.toggle('invisable');
     menu.querySelector('.menu-button-text').textContent = 'again ?';
+    const ldmBtn = document.querySelector(".LDM");
+    ldmBtn.disabled = false;
 
   }
 }
@@ -270,8 +296,10 @@ class App {
   constructor() {
     const ldm = new lowDetailMode();
     const startButton = document.querySelector('.menu-button');
+    const menu = document.querySelector('.menu')
     startButton.addEventListener('click', () => {
-      document.querySelector('.menu').style = 'top: 0; opacity: 0;';
+      menu.classList.toggle('invisable');
+      ldm.ldmBtn.disabled = true;
       startButton.disabled = true;
       this.gameStart();
     });

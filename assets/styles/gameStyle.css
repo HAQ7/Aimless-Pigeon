@@ -1,11 +1,12 @@
 /* global --------------------------------------- */
 
 :root {
-    --pixelSize: 4;
+    --pixelSize: 3;
     --screenWidth: 0px;
-    --obstacleWidth: 4;
+    --obstacleWidth: 3;
     --isWidthSmall: 0;
     --isHeightSmall: 0;
+    font-size: 16px;
 }
 
 body {
@@ -111,12 +112,13 @@ body {
     width: calc(25px * var(--pixelSize));
     height: calc(32px * var(--pixelSize));
     overflow: hidden;
-    opacity: 0;
+    /* opacity: 0; */
+    visibility: hidden;
     transition: 0.2 opacity;
 }
 
 .visable {
-    opacity: 100%;
+    visibility: visible;
 }
 
 .pigeon-img {
@@ -162,7 +164,7 @@ body {
 /* obstacle ----------------------------------- */
 
 .full-obstacle {
-    width: 10vw;
+    width: calc(80px * var(--obstacleWidth));
     height: 100vh;
     right: 0;
     position: absolute;
@@ -177,11 +179,6 @@ body {
     position: absolute;
     right: 0;
     padding: 0;
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    user-select: none;
 }
 
 .upper {
@@ -216,7 +213,13 @@ body {
     height: 20vh;
     top: 20%;
     z-index: 10;
-    transition: 0.2s;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.invisable {
+    top: -100%;
+    opacity: 0;
 }
 
 .menu-img {
@@ -299,13 +302,13 @@ body {
 }
 
 .LDM {
-    width: 7em;
+    width: calc(50px * var(--pixelSize));
     height: 7em;
     margin-top: 2EM;
 }
 
 .LDM p {
-    font-size: 2em;
+    font-size: calc(5px * var(--pixelSize));
 }
 
 
@@ -319,8 +322,6 @@ body {
 @media (max-width: 800px) {
     :root {
         --isWidthSmall: 1;
-        --pixelSize: 3;
-        --obstacleWidth: 2;
     }
 
     
@@ -328,9 +329,15 @@ body {
 
 @media (max-height: 800px) {
     :root {
+        --isHeightSmall: 0.5;
+    }
+
+    
+}
+
+@media (max-height: 600px) {
+    :root {
         --isHeightSmall: 1;
-        --obstacleWidth: 3;
-        --pixelSize: 3;
     }
 
     
