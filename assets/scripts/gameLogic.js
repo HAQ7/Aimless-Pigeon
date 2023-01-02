@@ -10,30 +10,33 @@ class Helper {
 
     // the mess down here is for making it balacend for all screens........
 
+
+    this.freeSpace = 18;
+    this.mult = 5;
+
+    
     if (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 1 &&
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
       this.freeSpace = 35;
       this.mult = 3
-    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
+    } if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
       this.freeSpace = 25;
       this.mult = 4;
-    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0 &&
+    } if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0 &&
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 1) {
       this.freeSpace = 20;
       this.mult = 5;
-    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 1 &&
+    } if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 1 &&
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 0.5) {
       this.freeSpace = 25;
       this.mult = 4;
-    } else if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
+    } if (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isHeightSmall')) == 0.5 &&
     parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) == 0.5) {
       this.freeSpace = 21;
       this.mult = 4;
-    } else {
-      this.freeSpace = 18;
-      this.mult = 5;
     }
+
   }
 
   // end of if hell ------------------------------
@@ -170,24 +173,10 @@ class Playground {
     this.obstacle = new FullObstacle();
     this.score = new Score();
 
-    if (parseInt(getComputedStyle(document.documentElement).getPropertyValue('--isWidthSmall')) === 1) {
-      this.obstacleGenerator = setInterval(() => {
-        this.obstacle = new FullObstacle();
-        this.score.scoreAdd();
-      }, 2900);
-    } else {
-      this.obstacleGenerator = setInterval(() => {
-        if (
-          this.pigeon.elementLocation(this.pigeon.pigeonElement).x +
-          this.obstacle.upperObstaclePart.offsetWidth / 2 >
-          this.obstacle.elementLocation(this.obstacle.upperObstaclePart).x +
-          this.obstacle.upperObstaclePart.offsetWidth
-        ) {
-          this.obstacle = new FullObstacle();
-          this.score.scoreAdd();
-        }
-      });
-    }
+    this.obstacleGenerator = setInterval(() => {
+      this.obstacle = new FullObstacle();
+      this.score.scoreAdd();
+    }, 2900);
 
     this.gameStateChecker = setInterval(() => {
       this.gameStateCheck();
